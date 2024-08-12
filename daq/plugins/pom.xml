@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hd</groupId>
+        <artifactId>daq</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <groupId>com.hd.daq</groupId>
+    <artifactId>plugins</artifactId>
+    <version>1.0.0</version>
+    <name>plugins</name>
+    <description>plugin root module</description>
+    <packaging>pom</packaging>
+    <modules>
+        <module>rbscb</module>
+        <module>hdlink</module>
+        <module>cps</module>
+        <module>shike</module>
+    </modules>
+    <properties>
+        <main.version>1.0.0</main.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+<!--            <exclusions>-->
+<!--                &lt;!&ndash;不排除掉，插件加载不成功&ndash;&gt;-->
+<!--                <exclusion>-->
+<!--                    <artifactId>logback-classic</artifactId>-->
+<!--                    <groupId>ch.qos.logback</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+        </dependency>
+
+        <dependency>
+        <groupId>com.hd.daq</groupId>
+            <artifactId>mqtt</artifactId>
+            <version>${main.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gitee.starblues</groupId>
+            <artifactId>spring-brick-bootstrap</artifactId>
+            <version>${spring-brick.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

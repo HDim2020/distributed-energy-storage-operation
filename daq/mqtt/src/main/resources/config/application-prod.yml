@@ -1,0 +1,109 @@
+server:
+  port: 28080
+# 日志配置
+logging:
+  level:
+    com.hd.daq: debug
+    org.springframework: warn
+# MQTT server parameters
+transport:
+  mqtt:
+    bind_address: 0.0.0.0
+    bind_port: 1883
+    timeout: 10000
+    netty:
+      leak_detector_level: DISABLED
+      boss_group_thread_count: 1
+      worker_group_thread_count: 12
+      max_payload_size: 65536
+      so_keep_alive: false
+    # MQTT SSL configuration
+    ssl:
+      # Enable/disable SSL support
+      enabled: false
+      # SSL protocol: See http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#SSLContext
+      protocol: TLSv1.2
+      # Path to the key store that holds the SSL certificate
+      key_store: mqttserver.jks
+      # Password used to access the key store
+      key_store_password: server_ks_password
+      # Password used to access the key
+      key_password: server_key_password
+      # Type of the key store
+      key_store_type: JKS
+      # Skip certificate validity check for client certificates.
+      skip_validity_check_for_client_cert: false
+  sessions:
+    inactivity_timeout: 300000
+    report_timeout: 30000
+
+queue:
+  kafka:
+    bootstrap.servers: 172.18.1.243:9094
+    acks: all
+    retries: 1
+    batch.size: 16384
+    linger.ms: 1
+    buffer.memory: 33554432
+    replication_factor: 1
+    use_confluent_cloud: false
+    confluent:
+      ssl.algorithm: https
+      sasl.mechanism: PLAIN
+      sasl.config: org.apache.kafka.common.security.plain.PlainLoginModule required username=\"CLUSTER_API_KEY\" password=\"CLUSTER_API_SECRET\";
+      security.protocol: SASL_SSL
+    other:
+    topic-properties:
+      transport-api: retention.ms:604800000;segment.bytes:26214400;retention.bytes:1048576000;partitions:1
+  transport_api:
+    service_request_topic: serviceRequest
+    service_response_topic: serviceResponse
+    property_topic: telemetryData
+    event_topic: eventData
+    device_message_topic: device-message
+    max_pending_requests: 10000
+    max_requests_timeout: 10000
+    max_callback_threads: 100
+    request_poll_interval: 25
+    response_poll_interval: 25
+spring:
+  # redis 配置
+  redis:
+    # 地址
+    host: 172.18.1.243
+    # 端口，默认为6379
+    port: 16379
+    # 数据库索引
+    database: 0
+    # 密码
+    password: 123456
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+plugin:
+  runMode: prod
+  mainPackage: com.hd.daq
+  pluginFollowProfile: true
+  # 插件使用主程序日志配置
+  pluginFollowLog: true
+  # 如果配置是 windows 下路径, mac、linux 自行修改
+  pluginPath:
+    - ~/plugins
+  sortInitPluginIds:
+#    - RB-SCB
+#  decrypt:
+#    enable: false
+#    className: com.gitee.starblues.common.cipher.AesPluginCipher
+#    plugins:
+#      - pluginId: example-basic-1
+#        props:
+#          secretKey: mmfvXes1XckCi8F/y9i0uQ==

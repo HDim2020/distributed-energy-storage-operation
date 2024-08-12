@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="transport-api" />
+        <module name="shike" />
+        <module name="hdlink" />
+        <module name="rbscb" />
+        <module name="mqtt" />
+        <module name="cps" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cps" options="-parameters" />
+      <module name="daq" options="-parameters" />
+      <module name="hdlink" options="-parameters" />
+      <module name="mqtt" options="-parameters" />
+      <module name="plugins" options="-parameters" />
+      <module name="rbscb" options="-parameters" />
+      <module name="shike" options="-parameters" />
+      <module name="transport-api" options="-parameters" />
+    </option>
+  </component>
+</project>

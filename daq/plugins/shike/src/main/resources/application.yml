@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: @plugin.build.mode@
+logging:
+  config: classpath:config/logback-${spring.profiles.active}.xml
